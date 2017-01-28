@@ -11,6 +11,11 @@ var express = require('express'),
 
 app.set('port', process.env.PORT || 5000);
 
+process.on('unhandledRejection', function(reason, p){
+    console.log("Possibly Unhandled Rejection at: Promise ", p, " reason: ", reason);
+	    // application specific logging here
+		 });
+
 app.use(bodyParser.json());
 
 app.get('/webhook', (req, res) => {
