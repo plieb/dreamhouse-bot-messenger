@@ -20,9 +20,10 @@ exports.searchHouse_City = (sender, values) => {
 
 exports.searchHouse_Bedrooms_City_Range = (sender, values) => {
     messenger.send({text: `OK, looking for ${values[1]} bedrooms in ${values[2]} between ${values[3]} and ${values[4]}`}, sender);
-    salesforce.findProperties({bedrooms: values[1], city: values[2]}).then(properties => {
+    try {salesforce.findProperties({bedrooms: values[1], city: values[2]}).then(properties => {
         messenger.send(formatter.formatProperties(properties), sender);
     });
+	} catch (err) {console.log(err.stack)}
 };
 
 exports.searchHouse_Bedrooms_City = (sender, values) => {
