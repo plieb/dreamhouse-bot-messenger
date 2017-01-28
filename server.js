@@ -35,6 +35,7 @@ app.post('/webhook', (req, res) => {
             let result = processor.match(event.message.text);
 			console.log('TEST11')
             if (result) {
+			console.log(result.handler)
 			console.log('TEST12')
                 let handler = handlers[result.handler];
                 if (handler && typeof handler === "function") {
