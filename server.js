@@ -33,9 +33,12 @@ app.post('/webhook', (req, res) => {
         } else if (event.message && event.message.text) {
 			console.log('TEST1')
             let result = processor.match(event.message.text);
+			console.log('TEST11')
             if (result) {
+			console.log('TEST12')
                 let handler = handlers[result.handler];
                 if (handler && typeof handler === "function") {
+			console.log('TEST13')
                     handler(sender, result.match);
                 } else {
                     console.log("Handler " + result.handlerName + " is not defined");
