@@ -10,7 +10,7 @@ let nforce = require('nforce'),
 let org = nforce.createConnection({
     clientId: SF_CLIENT_ID,
     clientSecret: SF_CLIENT_SECRET,
-    redirectUri: 'https://recastai-salesforce.herokuapp.com/webhook',
+    redirectUri: 'https://login.salesforce.com/services/oauth2/token',
     mode: 'single',
     autoRefresh: true
 });
