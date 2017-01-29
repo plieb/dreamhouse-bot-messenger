@@ -14,6 +14,8 @@
     "moment": "^2.13.0",
     "nforce": "^1.4.1",
     "numeral": "^1.5.3",
+    "recastai": "^2.3.0",
+    "recastai-botconnector": "^1.0.1",
     "request": "^2.71.0"
   }
 }

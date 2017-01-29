@@ -1,5 +1,9 @@
 "use strict";
 
+/* module imports */
+const BotConnector = require('recastai-botconnector')
+const recastai = require('recastai')
+
 var express = require('express'),
     bodyParser = require('body-parser'),
     processor = require('./modules/processor'),
@@ -16,8 +20,14 @@ process.on('unhandledRejection', function(reason, p){
 	    // application specific logging here
 		 });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
+
+const myBot = new BotConnector({ userSlug: 'pe', botId: '588e0199991fd62d2abea86b', userToken: '2ed61b00061ae2ec8e9ce137b874f8de' })
+
+const client = new recastai.Client('YOUR_REQUEST_TOKEN');
+
+/*
 app.get('/webhook', (req, res) => {
     if (req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
         res.send(req.query['hub.challenge']);
@@ -25,7 +35,15 @@ app.get('/webhook', (req, res) => {
         res.send('Error, wrong validation token');
     }
 });
+*/
 
+app.post('/webhook', (req, res) => myBot.listen(req, res))
+
+myBot.onTextMessage(message => {
+  console.log(message)
+}
+
+/*
 app.post('/webhook', (req, res) => {
     let events = req.body.entry[0].messaging;
     for (let i = 0; i < events.length; i++) {
@@ -58,7 +76,8 @@ app.post('/webhook', (req, res) => {
     }
     res.sendStatus(200);
 });
+*/
 
 app.listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
+    console.log('Salesforce bot DreamHouse running on port ' + app.get('port'));
 });
