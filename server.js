@@ -27,7 +27,7 @@ const myBot = new BotConnector({ userSlug: 'pe', botId: '588e0199991fd62d2abea86
 
 const client = new recastai.Client('YOUR_REQUEST_TOKEN');
 
-/*
+
 app.get('/webhook', (req, res) => {
     if (req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
         res.send(req.query['hub.challenge']);
@@ -35,15 +35,15 @@ app.get('/webhook', (req, res) => {
         res.send('Error, wrong validation token');
     }
 });
-*/
 
+/*
 app.post('/webhook', (req, res) => myBot.listen(req, res))
 
 myBot.onTextMessage(message => {
   console.log(message)
   })
 
-/*
+*/
 app.post('/webhook', (req, res) => {
     let events = req.body.entry[0].messaging;
     for (let i = 0; i < events.length; i++) {
@@ -70,13 +70,11 @@ app.post('/webhook', (req, res) => {
                 console.log("Postback " + postback + " is not defined");
             }
         } else if (event.message && event.message.attachments) {
-			console.log('TEST3')
             uploads.processUpload(sender, event.message.attachments);
         }
     }
     res.sendStatus(200);
 });
-*/
 
 app.listen(app.get('port'), function () {
     console.log('Salesforce bot DreamHouse running on port ' + app.get('port'));
