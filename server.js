@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => myBot.listen(req, res))
 
 myBot.onTextMessage(message => {
   console.log(message)
-  )}
+  })
 
 /*
 app.post('/webhook', (req, res) => {
