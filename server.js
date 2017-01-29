@@ -23,9 +23,9 @@ process.on('unhandledRejection', function(reason, p){
 app.use(bodyParser.json())
 
 
-const myBot = new BotConnector({ userSlug: 'pe', botId: '588e0199991fd62d2abea86b', userToken: '2ed61b00061ae2ec8e9ce137b874f8de' })
+const myBot = new BotConnector({ userSlug: process.env.BC_USER_SLUG, botId: process.env.BC_BOT_ID, userToken: process.env.BC_USER_TOKEN })
 
-const client = new recastai.Client('YOUR_REQUEST_TOKEN');
+const client = new recastai.Client(process.env.RE_BOT_TOKEN);
 
 
 /*
