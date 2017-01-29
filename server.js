@@ -19,7 +19,6 @@ process.on('unhandledRejection', function(reason, p){
 app.use(bodyParser.json());
 
 app.get('/webhook', (req, res) => {
-	console.log('get, (req, res)')
     if (req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
         res.send(req.query['hub.challenge']);
     } else {
@@ -52,7 +51,6 @@ app.post('/webhook', (req, res) => {
                 }
             }
         } else if (event.postback) {
-			console.log('TEST2')
             let payload = event.postback.payload.split(",");
             let postback = postbacks[payload[0]];
             if (postback && typeof postback === "function") {
