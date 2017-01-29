@@ -43,7 +43,6 @@ myBot.onTextMessage(message => {
   console.log(message)
   })
 
-*/
 app.post('/webhook', (req, res) => {
     let events = req.body.entry[0].messaging;
     for (let i = 0; i < events.length; i++) {
@@ -75,6 +74,7 @@ app.post('/webhook', (req, res) => {
     }
     res.sendStatus(200);
 });
+*/
 
 app.listen(app.get('port'), function () {
     console.log('Salesforce bot DreamHouse running on port ' + app.get('port'));
