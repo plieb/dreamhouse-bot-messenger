@@ -1,6 +1,6 @@
 {
-  "name": "DreamHouse Bot for Messenger with Recast",
-  "description": "Salesforce-powered Bot for Messenger in the DreamHouse sample app",
+  "name": "Salesforce Bot with Recast",
+  "description": "Salesforce-powered Bot for Messenger in the DreamHouse sample app with Recast NLP",
   "env": {
     "FB_PAGE_TOKEN": {
       "description": "Facebook Messenger Access Token",
@@ -25,6 +25,22 @@
     },
     "SF_PASSWORD": {
       "description": "Salesforce password + secret token for your integration user",
+      "value":""
+    },
+    "BC_USER_SLUG": {
+      "description": "Recast bot connector user slug",
+      "value":""
+    },
+    "BC_BOT_ID": {
+      "description": "Recast bot connector bot id",
+      "value":""
+    },
+    "BC_USER_TOKEN": {
+      "description": "Recast bot connector user token",
+      "value":""
+    },
+    "RE_BOT_TOKEN": {
+      "description": "Recast bot token",
       "value":""
     }
   }
