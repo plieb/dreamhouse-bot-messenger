@@ -85,4 +85,5 @@ export default function findBedrooms(res, rep, sender) {
       }
     }
   }
+  return replies
 }
