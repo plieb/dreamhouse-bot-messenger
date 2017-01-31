@@ -13,6 +13,11 @@ export default function handleAction (res, replies, conversationToken) {
   if (actions[currentAction]) {
     console.log('Enter action')
     replies = actions[currentAction].default(res, replies, conversationToken)
+  } else if (res.reply()) {
+    replies.push({
+      type: 'text',
+      content: res.reply()
+    })
   } else {
     replies.push({
       type: 'text',
