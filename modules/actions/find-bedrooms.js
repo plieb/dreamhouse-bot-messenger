@@ -1,6 +1,6 @@
 
 let salesforce = require('../salesforce'),
-  formatter = require('../formatter');
+  formatter = require('../formatter')
 
 export default function findBedrooms(res, rep, sender) {
   console.log('FIND BEDRROMS')
@@ -17,6 +17,9 @@ export default function findBedrooms(res, rep, sender) {
       const priceMax = res.raw.entities.number[1].scalar
       replies.push(formatter.formatMsg(`OK, looking for houses between ${priceMin} and ${priceMax} in ${city} with ${bedrooms} bedrooms`))
       const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms})
+      console.log('======================================')
+      console.log(properties)
+      console.log('======================================')
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
