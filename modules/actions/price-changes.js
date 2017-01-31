@@ -7,7 +7,7 @@ export default async function priceChanges(res, rep, sender) {
 
   let replies = []
   replies.push(formatter.formatMsg(`OK, looking for recent price changes...`))
-  const properties = await salesforce.findPriceChanges()
+  const priceChanges = await salesforce.findPriceChanges()
   if (priceChanges.length) {
     console.log('======================================')
     console.log('YES PRICE CHANGES')
