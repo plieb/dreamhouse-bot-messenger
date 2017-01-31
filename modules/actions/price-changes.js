@@ -31,7 +31,7 @@ export default function priceChanges(res, replies, sender) {
   return replies*/
   console.log('PRICE CHANGES')
 
-  let replies = []
+  //let replies = []
   messenger.send({text: `OK, looking for recent price changes...`}, sender)
   salesforce.findPriceChanges().then(priceChanges => {
     if (priceChanges.length) {
