@@ -4,37 +4,36 @@ let moment = require("moment"),
     numeral = require("numeral");
 
 exports.formatProperties = properties => {
-    let elements = [];
-    properties.forEach(property => {
-            elements.push({
-                title: property.get("Title__c"),
-                subtitle: `${property.get("Address__c")}, ${property.get("City__c")} ${property.get("State__c")} · ${numeral(property.get("Price__c")).format('$0,0')}`,
-                "imageUrl": property.get("Picture__c"),
-                "buttons": [
-                    {
-                        "type": "postback",
-                        "title": "Schedule visit",
-                        "value": "schedule_visit," + property.getId()
-                    },
-                    {
-                        "type": "postback",
-                        "title": "View broker info",
-                        "value": "contact_broker," + property.getId()
-                    },
-                    {
-                        "type": "postback",
-                        "title": "Contact me",
-                        "value": "contact_me," + property.getId()
-                    }
-                ]
-            })
+  let elements = [];
+  properties.forEach(property => {
+    elements.push({
+      title: property.get("Title__c"),
+      subtitle: `${property.get("Address__c")}, ${property.get("City__c")} ${property.get("State__c")} · ${numeral(property.get("Price__c")).format('$0,0')}`,
+      "imageUrl": property.get("Picture__c"),
+      "buttons": [
+        {
+          "type": "postback",
+          "title": "Schedule visit",
+          "value": "schedule_visit," + property.getId()
+        },
+        {
+          "type": "postback",
+          "title": "View broker info",
+          "value": "contact_broker," + property.getId()
+        },
+        {
+          "type": "postback",
+          "title": "Contact me",
+          "value": "contact_me," + property.getId()
         }
-    );
-    return {
-      type: 'carouselle',
-      content: elements
-    }
-   /* return {
+      ]
+    })
+  })
+  return {
+    type: 'carouselle',
+    content: elements
+  }
+  /* return {
         "attachment": {
             "type": "template",
             "payload": {
@@ -43,7 +42,7 @@ exports.formatProperties = properties => {
             }
         }
     };*/
-};
+}
 
 exports.formatPriceChanges = priceChanges => {
     let elements = [];
