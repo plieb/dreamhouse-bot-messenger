@@ -17,7 +17,6 @@ export default async function priceChanges(res, rep, sender) {
     console.log('======================================')
     console.log('NO PRICE CHANGES')
     console.log('======================================')
-    messenger.send({text: ``}, sender)
     replies.push(formatter.formatMsg(`Couldn't find any price changes`))
   }
   return replies

@@ -16,9 +16,6 @@ export async function handleMessage (message) {
     let replies = await handleAction(res, message.reply(), senderId)
     replies.forEach(reply => message.addReply(reply))
 
-    console.log('======================================')
-    console.log(replies)
-    console.log('======================================')
     await message.reply()
 
   } catch (err) {
