@@ -14,7 +14,7 @@ import handleAction from './modules/actions'
 
 const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
 
-app = express();
+const app = express()
 
 app.set('port', process.env.PORT || 5000);
 
