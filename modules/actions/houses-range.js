@@ -3,7 +3,7 @@ let salesforce = require('../salesforce'),
     messenger = require('../messenger'),
     formatter = require('../formatter');
 
-export default function cityHousesRange(res, replies, sender) {
+export default function cityHousesRange(res, rep, sender) {
 /*  const content = {
     title: replies[0].content,
     buttons: [{
