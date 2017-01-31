@@ -43,7 +43,7 @@ export default function cityHouses(res, replies, sender) {
       console.log(properties)
       console.log(`length ${properties.length}`)
       console.log('======================================')
-      if (properties) {
+      if (properties.length) {
         console.log('======================================')
         console.log('IN PROPERTIES')
         console.log('======================================')
