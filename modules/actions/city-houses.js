@@ -36,10 +36,15 @@ export default function cityHouses(res, replies, sender) {
    console.log('======================================')
    console.log(res.raw.entities.location[0].raw)
    console.log('======================================')
-  }
-
+   const city = res.raw.entities.location[0].raw
+    messenger.send({text: `OK, looking for houses in ${city}`}, sender);
+    salesforce.findProperties({city: city}).then(properties => {
+        messenger.send(formatter.formatProperties(properties), sender);
+    });
+  } else {
     messenger.send({text: `OK, looking for houses for sale around you...`}, sender);
     salesforce.findProperties().then(properties => {
         messenger.send(formatter.formatProperties(properties), sender);
     });
+  }
 }
