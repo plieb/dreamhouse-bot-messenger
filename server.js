@@ -45,7 +45,7 @@ myBot.onTextMessage(message => {
   const userText = message.content.attachment.content
     const conversationToken = message.senderId
 
-	client.textConverse(userText, { conversationToken })
+ recastclient.textConverse(userText, { conversationToken })
 	  .then(res => {
 	  // We get the first reply from Recast.AI or a default reply
 		const reply = res.reply() || 'Sorry, I didn\'t understand'
