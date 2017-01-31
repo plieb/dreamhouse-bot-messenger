@@ -32,12 +32,11 @@ export default function cityHouses(res, replies, sender) {
 
   console.log('CITY HOUSES')
 
-  console.log('======================================')
-  console.log(res)
-  console.log('======================================')
-  console.log('======================================')
-  console.log(res.get('location'))
-  console.log('======================================')
+  if (res.raw.entities.location) {
+   console.log('======================================')
+   console.log(res.raw.entities.location[0].raw)
+   console.log('======================================')
+  }
 
     messenger.send({text: `OK, looking for houses for sale around you...`}, sender);
     salesforce.findProperties().then(properties => {
