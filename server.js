@@ -1,19 +1,20 @@
 "use strict";
 
 /* module imports */
-const BotConnector = require('recastai-botconnector')
-const recastai = require('recastai')
-const conversation = recastai.Conversation
+import Bot from 'recastai-botconnector'
+import { Client } from 'recastai'
 
-var express = require('express'),
-    bodyParser = require('body-parser'),
-    processor = require('./modules/processor'),
-    handlers = require('./modules/handlers'),
-    postbacks = require('./modules/postbacks'),
-    uploads = require('./modules/uploads'),
-    handleAction = require('./modules/actions')
-    FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN,
-    app = express();
+import express from  'express'
+import bodyParser from 'body-parser'
+import processor from './modules/processor'
+import handlers from './modules/handlers'
+import postbacks from './modules/postbacks'
+import uploads from './modules/uploads'
+import handleAction from './modules/actions'
+
+const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN,
+
+app = express();
 
 app.set('port', process.env.PORT || 5000);
 
@@ -24,8 +25,8 @@ process.on('unhandledRejection', function(reason, p){
 
 app.use(bodyParser.json())
 
-const myBot = new BotConnector({ userSlug: process.env.BC_USER_SLUG, botId: process.env.BC_BOT_ID, userToken: process.env.BC_USER_TOKEN })
-const client = new recastai.Client(process.env.RE_BOT_TOKEN);
+const myBot = new Bot({ userSlug: process.env.BC_USER_SLUG, botId: process.env.BC_BOT_ID, userToken: process.env.BC_USER_TOKEN })
+const recastClient = new Client(process.env.RE_BOT_TOKEN)
 
 /*
 app.get('/webhook', (req, res) => {
