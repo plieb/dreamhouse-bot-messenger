@@ -14,9 +14,12 @@ export async function handleMessage (message) {
     console.log(res)
     console.log('======================================')
     //handleAction(res, message.reply(), senderId)
-    let replies = handleAction(res, message.reply(), senderId)
+    let replies = await handleAction(res, message.reply(), senderId)
     replies.forEach(reply => message.addReply(reply))
 
+    console.log('======================================')
+    console.log(replies)
+    console.log('======================================')
     await message.reply()
 
   } catch (err) {
