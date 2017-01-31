@@ -42,7 +42,11 @@ export default function cityHouses(res, replies, sender) {
       console.log('======================================')
       console.log(properties)
       console.log('======================================')
+      if (properties) {
         messenger.send(formatter.formatProperties(properties), sender);
+      } else {
+        messenger.send({text: `Couldn't find any houses in ${city}`}, sender);
+      }
     });
   } else {
     messenger.send({text: `OK, looking for houses for sale around you...`}, sender);
