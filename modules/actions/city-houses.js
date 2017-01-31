@@ -41,10 +41,17 @@ export default function cityHouses(res, replies, sender) {
     salesforce.findProperties({city: city}).then(properties => {
       console.log('======================================')
       console.log(properties)
+      console.log(`length ${properties.length}`)
       console.log('======================================')
       if (properties) {
+        console.log('======================================')
+        console.log('IN PROPERTIES')
+        console.log('======================================')
         messenger.send(formatter.formatProperties(properties), sender);
       } else {
+        console.log('======================================')
+        console.log('OUT PROPERTIES')
+        console.log('======================================')
         messenger.send({text: `Couldn't find any houses in ${city}`}, sender);
       }
     });
@@ -55,3 +62,4 @@ export default function cityHouses(res, replies, sender) {
     });
   }
 }
+
