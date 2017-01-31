@@ -9,28 +9,32 @@ exports.formatProperties = properties => {
             elements.push({
                 title: property.get("Title__c"),
                 subtitle: `${property.get("Address__c")}, ${property.get("City__c")} ${property.get("State__c")} · ${numeral(property.get("Price__c")).format('$0,0')}`,
-                "image_url": property.get("Picture__c"),
+                "imageUrl": property.get("Picture__c"),
                 "buttons": [
                     {
                         "type": "postback",
                         "title": "Schedule visit",
-                        "payload": "schedule_visit," + property.getId()
+                        "value": "schedule_visit," + property.getId()
                     },
                     {
                         "type": "postback",
                         "title": "View broker info",
-                        "payload": "contact_broker," + property.getId()
+                        "value": "contact_broker," + property.getId()
                     },
                     {
                         "type": "postback",
                         "title": "Contact me",
-                        "payload": "contact_me," + property.getId()
+                        "value": "contact_me," + property.getId()
                     }
                 ]
             })
         }
     );
     return {
+      type: 'carouselle',
+      content: elements
+    }
+   /* return {
         "attachment": {
             "type": "template",
             "payload": {
@@ -38,7 +42,7 @@ exports.formatProperties = properties => {
                 "elements": elements
             }
         }
-    };
+    };*/
 };
 
 exports.formatPriceChanges = priceChanges => {

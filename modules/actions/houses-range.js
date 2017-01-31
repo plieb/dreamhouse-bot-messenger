@@ -31,6 +31,7 @@ export default function cityHousesRange(res, replies, sender) {
   return replies*/
   console.log('HOUSES RANGE')
 
+  let replies = []
   const city = res.raw.entities.location ? res.raw.entities.location[0].raw : null
   console.log('======================================')
   console.log(`CITY : ${city}`)
@@ -44,12 +45,24 @@ export default function cityHousesRange(res, replies, sender) {
       const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
-      messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`}, sender);
+      //messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`}, sender);
+      let msg = {
+        type: 'text',
+        content: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`
+      }
+      replies.push(msg)
       salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city}).then(properties => {
         if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
+//          messenger.send(formatter.formatProperties(properties), sender);
+          let msg = formatter.formatProperties(properties)
+          replies.push(msg)
         } else {
-          messenger.send({text: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`}, sender);
+          let msg = {
+            type: 'text',
+            content: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`
+          }
+          replies.push(msg)
+          //messenger.send({text: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`}, sender);
         }
       })
     } else {

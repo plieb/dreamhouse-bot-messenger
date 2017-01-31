@@ -13,8 +13,11 @@ export async function handleMessage (message) {
     console.log('======================================')
     console.log(res)
     console.log('======================================')
-    handleAction(res, message.reply(), senderId)
-    //await message.reply()
+    //handleAction(res, message.reply(), senderId)
+    replies = handleAction(res, message.reply(), senderId)
+    replies.forEach(reply => message.addReply(reply))
+
+    await message.reply()
 
   } catch (err) {
     console.error('An error occured while handling message', err)

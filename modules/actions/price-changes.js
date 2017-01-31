@@ -31,19 +31,20 @@ export default function priceChanges(res, replies, sender) {
   return replies*/
   console.log('PRICE CHANGES')
 
-  messenger.send({text: `OK, looking for recent price changes...`}, sender);
+  let replies = []
+  messenger.send({text: `OK, looking for recent price changes...`}, sender)
   salesforce.findPriceChanges().then(priceChanges => {
     if (priceChanges.length) {
       console.log('======================================')
       console.log('YES PRICE CHANGES')
       console.log('======================================')
-      messenger.send(formatter.formatPriceChanges(priceChanges), sender);
+      messenger.send(formatter.formatPriceChanges(priceChanges), sender)
     } else {
       console.log('======================================')
       console.log('NO PRICE CHANGES')
       console.log('======================================')
-      messenger.send({text: `Couldn't find any price changes`}, sender);
+      messenger.send({text: `Couldn't find any price changes`}, sender)
     }
-  });
+  })
 }
 
