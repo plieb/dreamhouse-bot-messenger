@@ -33,6 +33,9 @@ export default function cityHouses(res, replies, sender) {
   console.log('CITY HOUSES')
 
   console.log('======================================')
+  console.log(res)
+  console.log('======================================')
+  console.log('======================================')
   console.log(res.get('location'))
   console.log('======================================')
 
