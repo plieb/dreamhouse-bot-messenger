@@ -6,10 +6,6 @@ const actions = {
 }
 
 export default function handleAction (res, replies, conversationToken) {
-  console.log('======================================')
-  console.log(res.action)
-  console.log(res.action.slug)
-  console.log('======================================')
   const currentAction = res.action && res.action.slug
   console.log(currentAction)
   if (actions[currentAction]) {
