@@ -4,31 +4,6 @@ let salesforce = require('../salesforce'),
     formatter = require('../formatter');
 
 export default async function cityHousesRange(res, rep, sender) {
-/*  const content = {
-    title: replies[0].content,
-    buttons: [{
-      title: 'Annulation',
-      value: 'PAYLOAD_ANNULATION',
-    },
-      {
-        title: 'Rapatriement et frais medicaux',
-        value: 'PAYLOAD_RAPATRIEMENT',
-      },
-      {
-        title: 'Bagages',
-        value: 'PAYLOAD_BAGAGES',
-      },
-      {
-        title: 'Individuelle accident',
-        value: 'PAYLOAD_INDIVIDUELLE',
-      },
-    ]
-  }
-  replies[0] = ({
-    type: 'quickReplies',
-    content,
-  })
-  return replies*/
   console.log('HOUSES RANGE')
 
   let replies = []
@@ -45,31 +20,18 @@ export default async function cityHousesRange(res, rep, sender) {
       const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
-      //messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`}, sender);
-      let msg = {
-        type: 'text',
-        content: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`
-      }
-      replies.push(msg)
+      replies.push(formatter.formatMsg(`OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`))
       const properties = await salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city})
       if (properties.length) {
         console.log('======================================')
         console.log('IN LENGTH')
         console.log('======================================')
-        //          messenger.send(formatter.formatProperties(properties), sender);
-        let msg = formatter.formatProperties(properties)
-        console.log(`Formatter : ${msg}`)
-        replies.push(msg)
+        replies.push(formatter.formatProperties(properties))
       } else {
-        let msg = {
-          type: 'text',
-          content: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`
-        }
-        replies.push(msg)
-        //messenger.send({text: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`}, sender);
+        replies.push(formatter.formartMsg(`Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`))
       }
     } else {
-      messenger.send({text: `I need a price a price range !`}, sender);
+      replies.push(formatter.formatMsg('I need a price a price range !'))
     }
   } else if (res.raw.entities.number ) {
     console.log('======================================')
@@ -80,10 +42,16 @@ export default async function cityHousesRange(res, rep, sender) {
       const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
-      messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax}`}, sender);
-      salesforce.findProperties({priceMin: priceMin, priceMax: priceMax}).then(properties => {
+      let msg = {
+        type: 'text',
+        content: `OK, looking for houses between ${priceMin} and ${priceMax}`
+      }
+      replies.push(msg)
+      const properties = await salesforce.findProperties({priceMin: priceMin, priceMax: priceMax})
         if (properties.length) {
           messenger.send(formatter.formatProperties(properties), sender);
+          replies.push(msg)
+          let msg = formatter.formatProperties(properties)
         } else {
           messenger.send({text: `Couldn't find any houses between ${priceMin} and ${priceMax}`}, sender);
         }
