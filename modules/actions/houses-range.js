@@ -40,7 +40,7 @@ export default function cityHousesRange(res, replies, sender) {
     salesforce.findProperties({city: city}).then(properties => {
       console.log('======================================')
       console.log(properties)
-      console.log(properties.length)
+      console.log(`length ${properties.length}`)
       console.log('======================================')
       if (properties) {
         console.log('======================================')
@@ -48,6 +48,9 @@ export default function cityHousesRange(res, replies, sender) {
         console.log('======================================')
         messenger.send(formatter.formatProperties(properties), sender);
       } else {
+        console.log('======================================')
+        console.log('OUT PROPERTIES')
+        console.log('======================================')
         messenger.send({text: `Couldn't find any houses in ${city}`}, sender);
       }
     });
