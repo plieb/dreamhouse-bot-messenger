@@ -15,7 +15,7 @@ export default async function cityHousesRange(res, rep, sender) {
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`))
       }
     } else {
       replies.push(formatter.formatMsg('I need a price a price range !'))
@@ -29,7 +29,7 @@ export default async function cityHousesRange(res, rep, sender) {
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses between ${priceMin} and ${priceMax}`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses between ${priceMin} and ${priceMax}`))
       }
     } else {
       replies.push(formatter.formatMsg('I need a price a price range !'))

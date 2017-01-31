@@ -15,23 +15,23 @@ export default function findBedrooms(res, rep, sender) {
     if (res.raw.entities.number.length === 2) {
       const priceMin = res.raw.entities.number[0].scalar
       const priceMax = res.raw.entities.number[1].scalar
-      replies.push(formatter.formartMsg(`OK, looking for houses between ${priceMin} and ${priceMax} in ${city} with ${bedrooms} bedrooms`))
+      replies.push(formatter.formatMsg(`OK, looking for houses between ${priceMin} and ${priceMax} in ${city} with ${bedrooms} bedrooms`))
       const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses in ${city} between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses in ${city} between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
       }
     } else {
       console.log('======================================')
       console.log('NO CITY AND BEDROOMS')
       console.log('======================================')
-      replies.push(formatter.formartMsg(`OK, looking for houses between in ${city} with ${bedrooms} bedrooms`))
+      replies.push(formatter.formatMsg(`OK, looking for houses between in ${city} with ${bedrooms} bedrooms`))
       const properties = salesforce.findProperties({city: city, bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses in ${city} with ${bedrooms} bedrooms`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses in ${city} with ${bedrooms} bedrooms`))
       }
     }
   } else if (res.raw.entities.number ) {
@@ -41,23 +41,23 @@ export default function findBedrooms(res, rep, sender) {
     if (res.raw.entities.number.length === 2) {
       const priceMin = res.raw.entities.number[0].scalar
       const priceMax = res.raw.entities.number[1].scalar
-      replies.push(formatter.formartMsg(`OK, looking for houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
+      replies.push(formatter.formatMsg(`OK, looking for houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
       const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
       }
     } else {
       console.log('======================================')
       console.log('JUST BEDROOMS')
       console.log('======================================')
-      replies.push(formatter.formartMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
+      replies.push(formatter.formatMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
       const properties = salesforce.findProperties({bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
       }
     }
   } else {
@@ -65,23 +65,23 @@ export default function findBedrooms(res, rep, sender) {
       console.log('======================================')
       console.log('CITY AND BEDROOMS')
       console.log('======================================')
-      replies.push(formatter.formartMsg(`OK, looking for houses between with ${bedrooms} bedrooms in ${city}`))
+      replies.push(formatter.formatMsg(`OK, looking for houses between with ${bedrooms} bedrooms in ${city}`))
       const properties = salesforce.findProperties({bedrooms: bedrooms, city: city})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses with ${bedrooms} bedrooms in ${city}`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses with ${bedrooms} bedrooms in ${city}`))
       }
     } else {
       console.log('======================================')
       console.log('JUST BEDROOMS')
       console.log('======================================')
-      replies.push(formatter.formartMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
+      replies.push(formatter.formatMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
       const properties = salesforce.findProperties({bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
-        replies.push(formatter.formartMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
+        replies.push(formatter.formatMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
       }
     }
   }
