@@ -11,6 +11,8 @@ import handlers from './modules/handlers'
 import postbacks from './modules/postbacks'
 import uploads from './modules/uploads'
 import handleAction from './modules/actions'
+import { handleMessage  } from './messages'
+
 
 const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
 
@@ -40,6 +42,9 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', (req, res) => myBot.listen(req, res))
 
+myBot.onTextMessage(handleMessage)
+
+/*
 myBot.onTextMessage(message => {
   console.log(message)
   const userText = message.content.attachment.content
@@ -61,7 +66,7 @@ myBot.onTextMessage(message => {
 	.then(() => console.log('Message successfully sent'))
 	.catch(err => console.error(`Error while sending message: ${err}`))
 })
-
+*/
 /*
 app.post('/webhook', (req, res) => {
     let events = req.body.entry[0].messaging;
