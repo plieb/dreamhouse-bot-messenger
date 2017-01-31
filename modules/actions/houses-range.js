@@ -63,7 +63,6 @@ export default function cityHousesRange(res, rep, sender) {
           }
           replies.push(msg)
           //messenger.send({text: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax}`}, sender);
-          return replies
         }
       })
     } else {
@@ -92,4 +91,8 @@ export default function cityHousesRange(res, rep, sender) {
   } else {
       messenger.send({text: `I need a price a price range !`}, sender);
   }
+  console.log('======================================')
+  console.log(replies)
+  console.log('======================================')
+  return replies
 }
