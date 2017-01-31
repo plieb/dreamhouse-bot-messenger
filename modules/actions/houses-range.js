@@ -41,7 +41,7 @@ export default function cityHousesRange(res, replies, sender) {
     console.log('======================================')
     if (res.raw.entities.number.length === 2) {
       const priceMin = res.raw.entities.number[0].scalar
-      const priceMax = res.raw.entities.number[0].scalar
+      const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
       messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`}, sender);
@@ -60,8 +60,8 @@ export default function cityHousesRange(res, replies, sender) {
     console.log('NO CITY BUT NUMBER')
     console.log('======================================')
     if (res.raw.entities.number.length === 2) {
-      const priceMin = res.raw.entities.number[0].raw
-      const priceMax = res.raw.entities.number[0].raw
+      const priceMin = res.raw.entities.number[0].scalar
+      const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
       messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax}`}, sender);
