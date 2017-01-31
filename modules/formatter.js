@@ -5,7 +5,7 @@ let moment = require("moment"),
 
 exports.formatMsg = msg => {
   return {
-    type: 'text'
+    type: 'text',
     content: msg
   }
 }
