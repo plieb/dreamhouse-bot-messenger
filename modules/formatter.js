@@ -116,8 +116,7 @@ exports.formatBroker = broker => {
   console.log('======================================')
   console.log('HELLO')
   console.log('======================================')
-  let elements = [];
-  elements.push({
+  let elements = {
     title: "Caroline Kingsley",
     subtitle: "Senior Broker  · 617-219-6363 · ckingsley@dreamhouse.com",
     "imageUrl": "https://s3-us-west-1.amazonaws.com/sfdc-demo/messenger/caroline_500x260.png",
@@ -128,7 +127,7 @@ exports.formatBroker = broker => {
         "value": "Contact me"
       }
     ]
-  })
+  }
   return {
     type: 'card',
     content: elements
