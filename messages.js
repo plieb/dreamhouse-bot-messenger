@@ -10,7 +10,7 @@ export async function handleMessage (message) {
     const { senderId  } = message
     console.log('MESSAGE RECEIVED', message)
     const res = await recastClient.textConverse(text, { conversationToken: senderId  })
-    handleAction(res, message.reply(), conversationToken)
+    handleAction(res, message.reply(), senderId)
     //await message.reply()
 
   } catch (err) {
