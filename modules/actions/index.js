@@ -1,4 +1,4 @@
-export actions = {
+const actions = {
   'city-houses': require('./city-houses'),
   'find-bedrooms': require('./find-bedrooms'),
   'houses-range': require('./houses-range'),

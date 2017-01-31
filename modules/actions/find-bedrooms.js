@@ -1,7 +1,7 @@
 
-let salesforce = require('./salesforce'),
-    messenger = require('./messenger'),
-    formatter = require('./formatter');
+let salesforce = require('../salesforce'),
+    messenger = require('../messenger'),
+    formatter = require('../formatter');
 
 export default function cityHouses(res, replies, sender) {
 /*  const content = {
