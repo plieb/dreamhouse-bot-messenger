@@ -7,12 +7,13 @@ const actions = {
   'contact-me': require('./contact-me'),
 }
 
-export default function handleAction (res, replies, conversationToken) {
+export default function handleAction (res, rep, conversationToken) {
   const currentAction = res.action && res.action.slug
   console.log(currentAction)
+  let replies = []
   if (actions[currentAction]) {
     console.log('Enter action')
-    replies = actions[currentAction].default(res, replies, conversationToken)
+    replies = actions[currentAction].default(res, rep, conversationToken)
   } else if (res.reply()) {
     replies.push({
       type: 'text',
