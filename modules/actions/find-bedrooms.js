@@ -1,36 +1,11 @@
 
 let salesforce = require('../salesforce'),
-    messenger = require('../messenger'),
-    formatter = require('../formatter');
+  formatter = require('../formatter');
 
 export default function findBedrooms(res, replies, sender) {
-/*  const content = {
-    title: replies[0].content,
-    buttons: [{
-      title: 'Annulation',
-      value: 'PAYLOAD_ANNULATION',
-    },
-      {
-        title: 'Rapatriement et frais medicaux',
-        value: 'PAYLOAD_RAPATRIEMENT',
-      },
-      {
-        title: 'Bagages',
-        value: 'PAYLOAD_BAGAGES',
-      },
-      {
-        title: 'Individuelle accident',
-        value: 'PAYLOAD_INDIVIDUELLE',
-      },
-    ]
-  }
-  replies[0] = ({
-    type: 'quickReplies',
-    content,
-  })
-  return replies*/
   console.log('FIND BEDRROMS')
 
+  let replies =[]
   const city = res.raw.entities.location ? res.raw.entities.location[0].raw : null
   const bedrooms = parseInt(res.raw.entities.location ? res.raw.entities.bedrooms[0].raw : null)
   if (res.raw.entities.number && city) {
@@ -42,26 +17,24 @@ export default function findBedrooms(res, replies, sender) {
       const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
-      messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city} with ${bedrooms} bedrooms`}, sender);
-      salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms}).then(properties => {
-        if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
-        } else {
-          messenger.send({text: `Couldn't find any houses in ${city} between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`}, sender);
-        }
-      })
+      replies.push(formatter.formartMsg(`OK, looking for houses between ${priceMin} and ${priceMax} in ${city} with ${bedrooms} bedrooms`))
+      const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms})
+      if (properties.length) {
+        replies.push(formatter.formatProperties(properties))
+      } else {
+        replies.push(formatter.formartMsg(`Couldn't find any houses in ${city} between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
+      }
     } else {
       console.log('======================================')
       console.log('NO CITY AND BEDROOMS')
       console.log('======================================')
-      messenger.send({text: `OK, looking for houses between in ${city} with ${bedrooms} bedrooms`}, sender);
-      salesforce.findProperties({city: city, bedrooms: bedrooms}).then(properties => {
-        if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
-        } else {
-          messenger.send({text: `Couldn't find any houses in ${city} with ${bedrooms} bedrooms`}, sender);
-        }
-      })
+      replies.push(formatter.formartMsg(`OK, looking for houses between in ${city} with ${bedrooms} bedrooms`))
+      const properties = salesforce.findProperties({city: city, bedrooms: bedrooms})
+      if (properties.length) {
+        replies.push(formatter.formatProperties(properties))
+      } else {
+        replies.push(formatter.formartMsg(`Couldn't find any houses in ${city} with ${bedrooms} bedrooms`))
+      }
     }
   } else if (res.raw.entities.number ) {
     console.log('======================================')
@@ -72,52 +45,48 @@ export default function findBedrooms(res, replies, sender) {
       const priceMax = res.raw.entities.number[1].scalar
       console.log(`MIN : ${priceMin}`)
       console.log(`MAX : ${priceMax}`)
-      messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`}, sender);
-      salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, bedrooms: bedrooms}).then(properties => {
-        if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
-        } else {
-          messenger.send({text: `Couldn't find any houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`}, sender);
-        }
-      })
+      replies.push(formatter.formartMsg(`OK, looking for houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
+      const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, bedrooms: bedrooms})
+      if (properties.length) {
+        replies.push(formatter.formatProperties(properties))
+      } else {
+        replies.push(formatter.formartMsg(`Couldn't find any houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
+      }
     } else {
       console.log('======================================')
       console.log('JUST BEDROOMS')
       console.log('======================================')
-      messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms`}, sender);
-      salesforce.findProperties({bedrooms: bedrooms}).then(properties => {
-        if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
-        } else {
-          messenger.send({text: `Couldn't find any houses with ${bedrooms} bedrooms`}, sender);
-        }
-      })
+      replies.push(formatter.formartMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
+      const properties = salesforce.findProperties({bedrooms: bedrooms})
+      if (properties.length) {
+        replies.push(formatter.formatProperties(properties))
+      } else {
+        replies.push(formatter.formartMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
+      }
     }
   } else {
     if (city) {
       console.log('======================================')
       console.log('CITY AND BEDROOMS')
       console.log('======================================')
-      messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms in ${city}`}, sender);
-      salesforce.findProperties({bedrooms: bedrooms, city: city}).then(properties => {
-        if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
-        } else {
-          messenger.send({text: `Couldn't find any houses with ${bedrooms} bedrooms in ${city}`}, sender);
-        }
-      })
+      replies.push(formatter.formartMsg(`OK, looking for houses between with ${bedrooms} bedrooms in ${city}`))
+      const properties = salesforce.findProperties({bedrooms: bedrooms, city: city})
+      if (properties.length) {
+        replies.push(formatter.formatProperties(properties))
+      } else {
+        replies.push(formatter.formartMsg(`Couldn't find any houses with ${bedrooms} bedrooms in ${city}`))
+      }
     } else {
       console.log('======================================')
       console.log('JUST BEDROOMS')
       console.log('======================================')
-      messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms`}, sender);
-      salesforce.findProperties({bedrooms: bedrooms}).then(properties => {
-        if (properties.length) {
-          messenger.send(formatter.formatProperties(properties), sender);
-        } else {
-          messenger.send({text: `Couldn't find any houses with ${bedrooms} bedrooms`}, sender);
-        }
-      })
+      replies.push(formatter.formartMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
+      const properties = salesforce.findProperties({bedrooms: bedrooms})
+      if (properties.length) {
+        replies.push(formatter.formatProperties(properties))
+      } else {
+        replies.push(formatter.formartMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
+      }
     }
   }
 }
