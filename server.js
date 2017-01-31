@@ -50,7 +50,7 @@ myBot.onTextMessage(message => {
 	  // We get the first reply from Recast.AI or a default reply
 		const reply = res.reply() || 'Sorry, I didn\'t understand'
 
-    handleAction(res, replies, conversationToken)
+    handleAction(res, reply, conversationToken)
 		const response = {
 		  type: 'text',
 		  content: reply,
