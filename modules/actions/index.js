@@ -3,6 +3,8 @@ const actions = {
   'find-bedrooms': require('./find-bedrooms'),
   'houses-range': require('./houses-range'),
   'price-changes': require('./price-changes'),
+  'broker-info': require('./broker-info'),
+  'contact-me': require('./contact-me'),
 }
 
 export default function handleAction (res, replies, conversationToken) {
