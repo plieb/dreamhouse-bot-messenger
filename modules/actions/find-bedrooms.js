@@ -89,13 +89,24 @@ export default function findBedrooms(res, replies, sender) {
       })
     }
   } else {
-    messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms`}, sender);
-    salesforce.findProperties({bedrooms: bedrooms}).then(properties => {
-      if (properties.length) {
-        messenger.send(formatter.formatProperties(properties), sender);
-      } else {
-        messenger.send({text: `Couldn't find any houses with ${bedrooms} bedrooms`}, sender);
-      }
-    })
+    if (city) {
+      messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms in ${city}`}, sender);
+      salesforce.findProperties({bedrooms: bedrooms, city: city}).then(properties => {
+        if (properties.length) {
+          messenger.send(formatter.formatProperties(properties), sender);
+        } else {
+          messenger.send({text: `Couldn't find any houses with ${bedrooms} bedrooms in ${city}`}, sender);
+        }
+      })
+    } else {
+      messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms`}, sender);
+      salesforce.findProperties({bedrooms: bedrooms}).then(properties => {
+        if (properties.length) {
+          messenger.send(formatter.formatProperties(properties), sender);
+        } else {
+          messenger.send({text: `Couldn't find any houses with ${bedrooms} bedrooms`}, sender);
+        }
+      })
+    }
   }
 }
