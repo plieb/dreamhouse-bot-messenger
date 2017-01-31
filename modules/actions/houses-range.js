@@ -32,10 +32,18 @@ export default function cityHousesRange(res, replies, sender) {
   console.log('HOUSES RANGE')
 
   const city = res.raw.entities.location ? res.raw.entities.location[0].raw : null
+  console.log('======================================')
+  console.log(`CITY : ${city}`)
+  console.log('======================================')
   if (res.raw.entities.number && city) {
+    console.log('======================================')
+    console.log('CITY AND NUMBER')
+    console.log('======================================')
     if (res.raw.entities.number.length === 2) {
       const priceMin = res.raw.entities.number[0].scalar
       const priceMax = res.raw.entities.number[0].scalar
+      console.log(`MIN : ${priceMin}`)
+      console.log(`MAX : ${priceMax}`)
       messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax} in ${city}`}, sender);
       salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city}).then(properties => {
         if (properties.length) {
@@ -48,9 +56,14 @@ export default function cityHousesRange(res, replies, sender) {
       messenger.send({text: `I need a price a price range !`}, sender);
     }
   } else if (res.raw.entities.number ) {
+    console.log('======================================')
+    console.log('NO CITY BUT NUMBER')
+    console.log('======================================')
     if (res.raw.entities.number.length === 2) {
-      const priceMin = res.raw.entities.number[0].scalar
-      const priceMax = res.raw.entities.number[0].scalar
+      const priceMin = res.raw.entities.number[0].raw
+      const priceMax = res.raw.entities.number[0].raw
+      console.log(`MIN : ${priceMin}`)
+      console.log(`MAX : ${priceMax}`)
       messenger.send({text: `OK, looking for houses between ${priceMin} and ${priceMax}`}, sender);
       salesforce.findProperties({priceMin: priceMin, priceMax: priceMax}).then(properties => {
         if (properties.length) {
