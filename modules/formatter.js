@@ -26,12 +26,12 @@ exports.formatProperties = properties => {
         {
           "type": "postback",
           "title": "View broker info",
-          "value": "contact_broker," + property.getId()
+          "value": "View broker info"
         },
         {
           "type": "postback",
           "title": "Contact me",
-          "value": "contact_me," + property.getId()
+          "value": "Contact me"
         }
       ]
     })
