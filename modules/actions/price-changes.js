@@ -3,7 +3,7 @@ let salesforce = require('../salesforce'),
     messenger = require('../messenger'),
     formatter = require('../formatter');
 
-export default function cityHouses(res, replies, sender) {
+export default function priceChanges(res, replies, sender) {
 /*  const content = {
     title: replies[0].content,
     buttons: [{
@@ -29,9 +29,11 @@ export default function cityHouses(res, replies, sender) {
     content,
   })
   return replies*/
-    messenger.send({text: `OK, looking for houses for sale around you...`}, sender);
-    salesforce.findProperties().then(properties => {
-        messenger.send(formatter.formatProperties(properties), sender);
-    });
+  console.log('PRICE CHANGES')
+
+  messenger.send({text: `OK, looking for recent price changes...`}, sender);
+  salesforce.findPriceChanges().then(priceChanges => {
+    messenger.send(formatter.formatPriceChanges(priceChanges), sender);
+  });
 }
 
