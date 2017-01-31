@@ -9,6 +9,7 @@ export default function handleAction (res, replies, conversationToken) {
   const currentAction = res.action && res.action.slug
   console.log(currentAction)
   if (actions[currentAction]) {
+    console.log('Enter action')
     replies = actions[currentAction].default(res, replies, conversationToken)
   }
   return replies

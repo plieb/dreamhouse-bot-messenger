@@ -29,6 +29,7 @@ export default function cityHouses(res, replies, sender) {
     content,
   })
   return replies*/
+  console.log('CITY HOUSES')
     messenger.send({text: `OK, looking for houses for sale around you...`}, sender);
     salesforce.findProperties().then(properties => {
         messenger.send(formatter.formatProperties(properties), sender);
