@@ -53,6 +53,9 @@ export default function cityHousesRange(res, rep, sender) {
       replies.push(msg)
       salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city}).then(properties => {
         if (properties.length) {
+          console.log('======================================')
+          console.log('IN LENGTH')
+          console.log('======================================')
 //          messenger.send(formatter.formatProperties(properties), sender);
           let msg = formatter.formatProperties(properties)
           replies.push(msg)
