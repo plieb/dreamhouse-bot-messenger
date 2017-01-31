@@ -99,12 +99,3 @@ export default function findBedrooms(res, replies, sender) {
     })
   }
 }
-
-
-
-
-  const city = res.raw.entities.location ? res.raw.entities.location[0].raw : null
-  console.log('======================================')
-  console.log(`CITY : ${city}`)
-  console.log('======================================')
-}
