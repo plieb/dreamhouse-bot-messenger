@@ -1,25 +1,25 @@
 
 let salesforce = require('../salesforce'),
-    messenger = require('../messenger'),
-    formatter = require('../formatter');
+    formatter = require('../formatter')
 
-export default function priceChanges(res, repl, sender) {
+export default async function priceChanges(res, rep, sender) {
   console.log('PRICE CHANGES')
 
   let replies = []
-  messenger.send({text: `OK, looking for recent price changes...`}, sender)
-  salesforce.findPriceChanges().then(priceChanges => {
-    if (priceChanges.length) {
-      console.log('======================================')
-      console.log('YES PRICE CHANGES')
-      console.log('======================================')
-      messenger.send(formatter.formatPriceChanges(priceChanges), sender)
-    } else {
-      console.log('======================================')
-      console.log('NO PRICE CHANGES')
-      console.log('======================================')
-      messenger.send({text: `Couldn't find any price changes`}, sender)
-    }
-  })
+  replies.push(formatter.formatMsg(`OK, looking for recent price changes...`))
+  const properties = await salesforce.findPriceChanges()
+  if (priceChanges.length) {
+    console.log('======================================')
+    console.log('YES PRICE CHANGES')
+    console.log('======================================')
+    replies.push(formatter.formatProperties(properties))
+  } else {
+    console.log('======================================')
+    console.log('NO PRICE CHANGES')
+    console.log('======================================')
+    messenger.send({text: ``}, sender)
+    replies.push(formatter.formatMsg(`Couldn't find any price changes`))
+  }
+  return replies
 }
 

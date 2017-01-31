@@ -2,7 +2,7 @@
 let salesforce = require('../salesforce'),
   formatter = require('../formatter')
 
-export default function findBedrooms(res, rep, sender) {
+export default async function findBedrooms(res, rep, sender) {
   console.log('FIND BEDRROMS')
 
   let replies =[]
@@ -16,7 +16,7 @@ export default function findBedrooms(res, rep, sender) {
       const priceMin = res.raw.entities.number[0].scalar
       const priceMax = res.raw.entities.number[1].scalar
       replies.push(formatter.formatMsg(`OK, looking for houses between ${priceMin} and ${priceMax} in ${city} with ${bedrooms} bedrooms`))
-      const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms})
+      const properties = await salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms})
       console.log('======================================')
       console.log(properties)
       console.log('======================================')
@@ -30,7 +30,7 @@ export default function findBedrooms(res, rep, sender) {
       console.log('NO CITY AND BEDROOMS')
       console.log('======================================')
       replies.push(formatter.formatMsg(`OK, looking for houses between in ${city} with ${bedrooms} bedrooms`))
-      const properties = salesforce.findProperties({city: city, bedrooms: bedrooms})
+      const properties = await salesforce.findProperties({city: city, bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
@@ -45,7 +45,7 @@ export default function findBedrooms(res, rep, sender) {
       const priceMin = res.raw.entities.number[0].scalar
       const priceMax = res.raw.entities.number[1].scalar
       replies.push(formatter.formatMsg(`OK, looking for houses between ${priceMin} and ${priceMax} with ${bedrooms} bedrooms`))
-      const properties = salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, bedrooms: bedrooms})
+      const properties = await salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
@@ -56,7 +56,7 @@ export default function findBedrooms(res, rep, sender) {
       console.log('JUST BEDROOMS')
       console.log('======================================')
       replies.push(formatter.formatMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
-      const properties = salesforce.findProperties({bedrooms: bedrooms})
+      const properties = await salesforce.findProperties({bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
@@ -69,7 +69,7 @@ export default function findBedrooms(res, rep, sender) {
       console.log('CITY AND BEDROOMS')
       console.log('======================================')
       replies.push(formatter.formatMsg(`OK, looking for houses between with ${bedrooms} bedrooms in ${city}`))
-      const properties = salesforce.findProperties({bedrooms: bedrooms, city: city})
+      const properties = await salesforce.findProperties({bedrooms: bedrooms, city: city})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
@@ -80,7 +80,7 @@ export default function findBedrooms(res, rep, sender) {
       console.log('JUST BEDROOMS')
       console.log('======================================')
       replies.push(formatter.formatMsg(`OK, looking for houses between with ${bedrooms} bedrooms`))
-      const properties = salesforce.findProperties({bedrooms: bedrooms})
+      const properties = await salesforce.findProperties({bedrooms: bedrooms})
       if (properties.length) {
         replies.push(formatter.formatProperties(properties))
       } else {
