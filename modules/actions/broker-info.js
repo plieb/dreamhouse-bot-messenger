@@ -8,8 +8,5 @@ export default async function brokerInfo(res, rep, sender) {
   let replies = []
   replies.push(formatter.formatMsg('Here is the broker information for this property'))
   replies.push(formatter.formatBroker())
-  console.log('======================================')
-  console.log(replies)
-  console.log('======================================')
   return replies
 }
