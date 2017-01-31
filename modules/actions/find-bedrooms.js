@@ -31,12 +31,11 @@ export default function findBedrooms(res, replies, sender) {
   return replies*/
   console.log('FIND BEDRROMS')
 
-
   const city = res.raw.entities.location ? res.raw.entities.location[0].raw : null
   const bedrooms = parseInt(res.raw.entities.location ? res.raw.entities.bedrooms[0].raw : null)
   if (res.raw.entities.number && city) {
     console.log('======================================')
-    console.log('CITY AND NUMBER')
+    console.log('CITY AND NUMBER AND BEDROOMS')
     console.log('======================================')
     if (res.raw.entities.number.length === 2) {
       const priceMin = res.raw.entities.number[0].scalar
@@ -52,8 +51,11 @@ export default function findBedrooms(res, replies, sender) {
         }
       })
     } else {
+      console.log('======================================')
+      console.log('NO CITY AND BEDROOMS')
+      console.log('======================================')
       messenger.send({text: `OK, looking for houses between in ${city} with ${bedrooms} bedrooms`}, sender);
-      salesforce.findProperties({priceMin: priceMin, priceMax: priceMax, city: city, bedrooms: bedrooms}).then(properties => {
+      salesforce.findProperties({city: city, bedrooms: bedrooms}).then(properties => {
         if (properties.length) {
           messenger.send(formatter.formatProperties(properties), sender);
         } else {
@@ -63,7 +65,7 @@ export default function findBedrooms(res, replies, sender) {
     }
   } else if (res.raw.entities.number ) {
     console.log('======================================')
-    console.log('NO CITY BUT NUMBER')
+    console.log('NO CITY BUT NUMBER AND BEDROOMS')
     console.log('======================================')
     if (res.raw.entities.number.length === 2) {
       const priceMin = res.raw.entities.number[0].scalar
@@ -79,6 +81,9 @@ export default function findBedrooms(res, replies, sender) {
         }
       })
     } else {
+      console.log('======================================')
+      console.log('JUST BEDROOMS')
+      console.log('======================================')
       messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms`}, sender);
       salesforce.findProperties({bedrooms: bedrooms}).then(properties => {
         if (properties.length) {
@@ -90,6 +95,9 @@ export default function findBedrooms(res, replies, sender) {
     }
   } else {
     if (city) {
+      console.log('======================================')
+      console.log('CITY AND BEDROOMS')
+      console.log('======================================')
       messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms in ${city}`}, sender);
       salesforce.findProperties({bedrooms: bedrooms, city: city}).then(properties => {
         if (properties.length) {
@@ -99,6 +107,9 @@ export default function findBedrooms(res, replies, sender) {
         }
       })
     } else {
+      console.log('======================================')
+      console.log('JUST BEDROOMS')
+      console.log('======================================')
       messenger.send({text: `OK, looking for houses between with ${bedrooms} bedrooms`}, sender);
       salesforce.findProperties({bedrooms: bedrooms}).then(properties => {
         if (properties.length) {
