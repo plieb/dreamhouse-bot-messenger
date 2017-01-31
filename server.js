@@ -24,10 +24,8 @@ process.on('unhandledRejection', function(reason, p){
 
 app.use(bodyParser.json())
 
-
 const myBot = new BotConnector({ userSlug: process.env.BC_USER_SLUG, botId: process.env.BC_BOT_ID, userToken: process.env.BC_USER_TOKEN })
 const client = new recastai.Client(process.env.RE_BOT_TOKEN);
-
 
 /*
 app.get('/webhook', (req, res) => {
