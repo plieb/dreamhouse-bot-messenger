@@ -54,17 +54,17 @@ exports.formatPriceChanges = priceChanges => {
         {
           "type": "postback",
           "title": "Schedule visit",
-          "value": "schedule_visit," + property.Id
+          "value": "Schedule visit" + property.Id
         },
         {
           "type": "postback",
           "title": "View broker info",
-          "value": "contact_broker," + property.Id
+          "value": "View broker info"
         },
         {
           "type": "postback",
           "title": "Contact me",
-          "value": "contact_me," + property.Id
+          "value": "Contact me"
         }
       ]
     })
@@ -113,6 +113,9 @@ exports.formatAppointment = property => {
 }
 
 exports.formatBroker = broker => {
+  console.log('======================================')
+  console.log('HELLO')
+  console.log('======================================')
   let elements = [];
   elements.push({
     title: "Caroline Kingsley",
@@ -122,7 +125,7 @@ exports.formatBroker = broker => {
       {
         "type": "postback",
         "title": "Contact Me",
-        "value": "contact_me"
+        "value": "Contact me"
       }
     ]
   })
