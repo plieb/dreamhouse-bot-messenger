@@ -12,7 +12,7 @@ import postbacks from './modules/postbacks'
 import uploads from './modules/uploads'
 import handleAction from './modules/actions'
 
-const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN,
+const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
 
 app = express();
 
