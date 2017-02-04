@@ -4,7 +4,7 @@ import handleAction from './modules/actions'
 
 const recastClient = new Client(process.env.RE_BOT_TOKEN)
 
-export async function handleMessage(message) {
+export default async function handleMessage(message) {
   console.log('\n**********************************************************')
   try {
     console.log('MESSAGE RECEIVED', message)

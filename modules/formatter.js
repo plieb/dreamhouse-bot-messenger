@@ -13,6 +13,9 @@ exports.formatProperties = (properties) => {
   console.log(properties)
   console.log('======================================')
   properties.forEach((property) => {
+    console.log('======================================')
+    console.log(property)
+    console.log('======================================')
     elements.push({
       title: property.get('Title__c'),
       subtitle: `${property.get('Address__c')}, ${property.get('City__c')} ${property.get('State__c')} · ${numeral(property.get('Price__c')).format('$0,0')}`,
