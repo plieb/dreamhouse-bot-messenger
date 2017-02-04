@@ -101,7 +101,7 @@ exports.formatAppointment = (property) => {
   ]
   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   console.log(property)
-  console.log(property.city__c)
+  console.log(property._fields)
   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   return {
     type: 'card',
