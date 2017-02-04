@@ -107,36 +107,36 @@ exports.formatAppointment = (property) => {
   return {
     type: 'card',
     content: {
-      title: `Select one of the available appointments below at ${property.address__c} in ${property.city__c}.`,
+      title: `Select one of the available appointments below at ${property.get('Address__c')} in ${property.get('City__c')}.`,
       buttons: [
         {
           type: 'postback',
           title: options[0],
           value: JSON.stringify({
-            text: `Confirm visit, ${property.address__c} in ${property.city__c}, ${options[0]}`,
-            propertyId: property.Id,
+            text: `Confirm visit, ${property.get('Address__c')} in ${property.get('City__c')}, ${options[0]}`,
+            propertyId: property.getId(),
             date: options[0],
-            city: property.city__c,
+            city: property.get('City__c'),
           }),
         },
         {
           type: 'postback',
           title: options[1],
           value: JSON.stringify({
-            text: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[1]}`,
-            propertyId: property.Id,
+            text: `Confirm visit, ${property.get('Address__c')} in ${property.get('City__c')}, ${options[1]}`,
+            propertyId: property.getId(),
             date: options[1],
-            city: property.City__c,
+            city: property.get('City__c'),
           }),
         },
         {
           type: 'postback',
           title: options[2],
           value: JSON.stringify({
-            text: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[2]}`,
-            propertyId: property.Id,
+            text: `Confirm visit, ${property.get('Address__c')} in ${property.get('City__c')}, ${options[2]}`,
+            propertyId: property.getId(),
             date: options[2],
-            city: property.City__c,
+            city: property.get('City__c'),
           }),
         },
       ],
