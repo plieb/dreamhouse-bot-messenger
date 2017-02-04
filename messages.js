@@ -10,10 +10,10 @@ export async function handleMessage(message) {
     console.log('MESSAGE RECEIVED', message)
 
     let text = ''
-    let msg = ''
+    let payload = ''
     if (message.content.attachment.type === 'payload') {
-      msg = JSON.parse(message.content.attachment.content)
-      text = msg.text
+      payload = JSON.parse(message.content.attachment.content)
+      text = payload.text
     } else {
       text = message.content.attachment.content
     }
@@ -22,7 +22,7 @@ export async function handleMessage(message) {
     console.log('======================================')
     console.log(res)
     console.log('======================================')
-    const replies = await handleAction(res, msg)
+    const replies = await handleAction(res, payload, message)
     console.log('======================================')
     console.log(replies)
     console.log('======================================')

@@ -139,7 +139,7 @@ exports.formatAppointment = (property) => {
   }
 }
 
-exports.formatBroker = (message) => {
+exports.formatBroker = (payload) => {
   const elements = {
     title: 'Caroline Kingsley',
     subtitle: 'Senior Broker  · 617-219-6363 · ckingsley@dreamhouse.com',
@@ -150,7 +150,7 @@ exports.formatBroker = (message) => {
         title: 'Contact Me',
         value: JSON.stringify({
           text: 'Contact me',
-          propertyId: message.properyId,
+          propertyId: payload.properyId,
         }),
       },
     ],
