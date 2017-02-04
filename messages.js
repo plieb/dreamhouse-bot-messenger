@@ -9,6 +9,9 @@ export async function handleMessage(message) {
   try {
     console.log('MESSAGE RECEIVED', message)
 
+    console.log('======================================')
+    console.log(message)
+    console.log('======================================')
     let text = ''
     let payload = ''
     if (message.content.attachment.type === 'payload') {
