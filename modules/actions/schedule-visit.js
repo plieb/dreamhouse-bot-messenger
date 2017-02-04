@@ -3,11 +3,14 @@ const salesforce = require('../salesforce')
 const formatter = require('../formatter')
 
 export default async function scheduleVisit(res, message) {
-  console.log('PRICE CHANGES')
+  console.log('SCHEDULE VISIT')
 
   const replies = []
-  const properties = await salesforce.findProperties({ id: message.propertyId })
-  replies.push(formatter.formatAppointment(properties))
+  const property = await salesforce.findProperties({ id: message.propertyId })
+  console.log('======================================')
+  console.log(property)
+  console.log('======================================')
+  replies.push(formatter.formatAppointment(property))
   return replies
 }
 

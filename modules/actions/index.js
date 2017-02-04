@@ -6,6 +6,7 @@ const actions = {
   'broker-info': require('./broker-info'),
   'contact-me': require('./contact-me'),
   'schedule-visit': require('./schedule-visit'),
+  'confirm-visit': require('./confirm-visit'),
 }
 
 export default function handleAction(res, message) {

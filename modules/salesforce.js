@@ -38,7 +38,6 @@ const findProperties = (params) => {
     if (parts.length > 0) {
       where = `WHERE ${parts.join(' AND ')}`
     }
-    console.log(params)
   }
   return new Promise((resolve, reject) => {
     const q = `SELECT id,
