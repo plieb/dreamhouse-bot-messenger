@@ -18,26 +18,26 @@ exports.formatProperties = (properties) => {
         {
           type: 'postback',
           title: 'Schedule visit',
-          value: {
+          value: JSON.stringify({
             text: 'Schedule visit',
             propertyId: property.getId(),
-          },
+          }),
         },
         {
           type: 'postback',
           title: 'View broker info',
-          value: {
+          value: JSON.stringify({
             text: 'View broker info',
             propertyId: property.getId(),
-          },
+          }),
         },
         {
           type: 'postback',
           title: 'Contact me',
-          value: {
+          value: JSON.stringify({
             text: 'Contact me',
             propertyId: property.getId(),
-          },
+          }),
         },
       ],
     })
@@ -60,28 +60,28 @@ exports.formatPriceChanges = (priceChanges) => {
         {
           type: 'postback',
           title: 'Schedule visit',
-          value: {
+          value: JSON.stringify({
             text: 'Schedule visit',
             propertyId: property.Id,
-          },
+          }),
         },
         {
           type: 'postback',
           title: 'View broker info',
-          value: {
+          value: JSON.stringify({
             text: 'View broker info',
             propertyId: property.Id,
 
-          },
+          }),
         },
         {
           type: 'postback',
           title: 'Contact me',
-          value: {
+          value: JSON.stringify({
             text: 'Contact me',
             propertyId: property.Id,
 
-          },
+          }),
         },
       ],
     })

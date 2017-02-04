@@ -4,20 +4,28 @@ import handleAction from './modules/actions'
 
 const recastClient = new Client(process.env.RE_BOT_TOKEN)
 
-export async function handleMessage (message) {
+export async function handleMessage(message) {
   console.log('\n**********************************************************')
   try {
     console.log('MESSAGE RECEIVED', message)
-    let text = message.content.attachment.content
+
+    let text = ''
+    let msg = ''
     if (message.content.attachment.type === 'payload') {
-      text = message.content.attachment.content.text
+      msg = JSON.parse(message.content.attachment.content)
+      console.log('======================================')
+      console.log(msg)
+      console.log('======================================')
+      text = msg.text
+    } else {
+      text = message.content.attachment.content
     }
     const { senderId } = message
     const res = await recastClient.textConverse(text, { conversationToken: senderId })
     console.log('======================================')
     console.log(res)
     console.log('======================================')
-    const replies = await handleAction(res, message)
+    const replies = await handleAction(res, msg)
     console.log('======================================')
     console.log(replies)
     console.log('======================================')
