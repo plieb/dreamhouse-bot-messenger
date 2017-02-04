@@ -7,11 +7,13 @@ export default async function contactMe(res, message) {
 
   const replies = []
   replies.push(formatter.formatMsg('Thanks for your interest. I asked a broker to contact you asap.'))
-  if (message.content.attachment.type === 'payload') {
-    const propertyId = message.content.attachement.content.split(',')[1]
-    const firstName = message.content.data.userName.split(' ')[0]
-    const lastName = message.content.data.userName.split(' ')[1]
-    await salesforce.createCase(propertyId, `${firstName} ${lastName}`, message.senderId)
+  const firstName = message.content.data.userName.split(' ')[0]
+  const lastName = message.content.data.userName.split(' ')[1]
+  if (message.propertyId) {
+    const propertyId = message.propertyId
+    await salesforce.createCase(`${firstName} ${lastName}`, message.senderId, propertyId)
+  } else {
+    await salesforce.createCase(`${firstName} ${lastName}`, message.senderId)
   }
   return replies
 }

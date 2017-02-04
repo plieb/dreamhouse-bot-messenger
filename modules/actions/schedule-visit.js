@@ -7,11 +7,11 @@ export default async function scheduleVisit(res, message) {
 
   const replies = []
   const properties = await salesforce.findProperties({ id: message.propertyId })
-  console.log('======================================')
-  console.log(properties)
-  console.log(properties[0])
-  console.log('======================================')
-  replies.push(formatter.formatAppointment(properties[0]))
+  if (properties.length) {
+    replies.push(formatter.formatAppointment(properties[0]))
+  } else {
+    replies.push(formatter.formatMsg('I need you to select a property !'))
+  }
   return replies
 }
 

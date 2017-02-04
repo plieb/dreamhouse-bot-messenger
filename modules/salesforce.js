@@ -119,7 +119,7 @@ const findPriceChanges = () => {
 }
 
 
-const createCase = (propertyId, customerName, customerId) => {
+const createCase = (customerName, customerId, propertyId) => {
   return new Promise((resolve, reject) => {
     const c = nforce.createSObject('Case')
     c.set('subject', `Contact ${customerName} (Facebook Customer)`)

@@ -99,11 +99,6 @@ exports.formatAppointment = (property) => {
     `${moment().add(3, 'days').format('dddd MMM Do')} at 1pm`,
     `${moment().add(3, 'days').format('dddd MMM Do')} at 6pm`,
   ]
-  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-  console.log(property)
-  console.log(property.get('Address__c'))
-  console.log(property.Record)
-  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   return {
     type: 'card',
     content: {
@@ -144,7 +139,7 @@ exports.formatAppointment = (property) => {
   }
 }
 
-exports.formatBroker = () => {
+exports.formatBroker = (message) => {
   const elements = {
     title: 'Caroline Kingsley',
     subtitle: 'Senior Broker  · 617-219-6363 · ckingsley@dreamhouse.com',
@@ -153,7 +148,10 @@ exports.formatBroker = () => {
       {
         type: 'postback',
         title: 'Contact Me',
-        value: 'Contact me',
+        value: JSON.stringify({
+          text: 'Contact me',
+          propertyId: message.properyId,
+        }),
       },
     ],
   }
