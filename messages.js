@@ -13,9 +13,6 @@ export async function handleMessage(message) {
     let msg = ''
     if (message.content.attachment.type === 'payload') {
       msg = JSON.parse(message.content.attachment.content)
-      console.log('======================================')
-      console.log(msg)
-      console.log('======================================')
       text = msg.text
     } else {
       text = message.content.attachment.content

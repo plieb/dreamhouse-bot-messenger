@@ -8,7 +8,7 @@ const actions = {
   'schedule-visit': require('./schedule-visit'),
 }
 
-export default function handleAction (res, message) {
+export default function handleAction(res, message) {
   const currentAction = res.action && res.action.slug
   console.log(currentAction)
   let replies = []
@@ -26,7 +26,7 @@ export default function handleAction (res, message) {
       content: 'Sorry I did not understand',
     })
   }
-  console.log('======================================')
+  console.log('========*****==============================')
   console.log(replies)
   console.log('======================================')
   return replies
