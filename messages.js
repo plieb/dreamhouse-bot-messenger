@@ -18,6 +18,9 @@ export async function handleMessage (message) {
     console.log(res)
     console.log('======================================')
     const replies = await handleAction(res, message)
+    console.log('======================================')
+    console.log(replies)
+    console.log('======================================')
     replies.forEach(reply => message.addReply(reply))
 
     await message.reply()

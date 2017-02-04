@@ -1,47 +1,47 @@
-"use strict";
+/* module imports */
+const nforce = require('nforce')
 
-let nforce = require('nforce'),
+/* ENV variables */
+const SF_CLIENT_ID = process.env.SF_CLIENT_ID
+const SF_CLIENT_SECRET = process.env.SF_CLIENT_SECRET
+const SF_USER_NAME = process.env.SF_USER_NAME
+const SF_PASSWORD = process.env.SF_PASSWORD
 
-    SF_CLIENT_ID = process.env.SF_CLIENT_ID,
-    SF_CLIENT_SECRET = process.env.SF_CLIENT_SECRET,
-    SF_USER_NAME = process.env.SF_USER_NAME,
-    SF_PASSWORD = process.env.SF_PASSWORD;
+const org = nforce.createConnection({
+  clientId: SF_CLIENT_ID,
+  clientSecret: SF_CLIENT_SECRET,
+  redirectUri: 'http://localhost:3000/oauth/_callback',
+  mode: 'single',
+  autoRefresh: true,
+})
 
-let org = nforce.createConnection({
-    clientId: SF_CLIENT_ID,
-    clientSecret: SF_CLIENT_SECRET,
-    redirectUri: 'http://localhost:3000/oauth/_callback',
-    mode: 'single',
-    autoRefresh: true
-});
-
-let login = () => {
-    org.authenticate({username: SF_USER_NAME, password: SF_PASSWORD}, err => {
-        if (err) {
-            console.error("Authentication error");
-            console.error(err);
-        } else {
-            console.log("Authentication successful");
-        }
-    });
-};
-
-let findProperties = (params) => {
-    let where = "";
-    if (params) {
-        let parts = [];
-        if (params.id) parts.push(`id='${params.id}'`);
-        if (params.city) parts.push(`city__c='${params.city}'`);
-        if (params.bedrooms) parts.push(`beds__c=${params.bedrooms}`);
-        if (params.priceMin) parts.push(`price__c>=${params.priceMin}`);
-        if (params.priceMax) parts.push(`price__c<=${params.priceMax}`);
-        if (parts.length>0) {
-            where = "WHERE " + parts.join(' AND ');
-        }
-      console.log(params)
+const login = () => {
+  org.authenticate({ username: SF_USER_NAME, password: SF_PASSWORD }, (err) => {
+    if (err) {
+      console.error('Authentication error')
+      console.error(err)
+    } else {
+      console.log('Authentication successful')
     }
-    return new Promise((resolve, reject) => {
-        let q = `SELECT id,
+  })
+}
+
+const findProperties = (params) => {
+  let where = ''
+  if (params) {
+    const parts = []
+    if (params.id) parts.push(`id='${params.id}'`)
+    if (params.city) parts.push(`city__c='${params.city}'`)
+    if (params.bedrooms) parts.push(`beds__c=${params.bedrooms}`)
+    if (params.priceMin) parts.push(`price__c>=${params.priceMin}`)
+    if (params.priceMax) parts.push(`price__c<=${params.priceMax}`)
+    if (parts.length > 0) {
+      where = `WHERE ${parts.join(' AND ')}`
+    }
+    console.log(params)
+  }
+  return new Promise((resolve, reject) => {
+    const q = `SELECT id,
                     title__c,
                     address__c,
                     city__c,
@@ -52,21 +52,20 @@ let findProperties = (params) => {
                     picture__c
                 FROM property__c
                 ${where}
-                LIMIT 5`;
-        org.query({query: q}, (err, resp) => {
-            if (err) {
-                reject("An error as occurred");
-            } else {
-                resolve(resp.records);
-            }
-        });
-    });
+                LIMIT 5`
+    org.query({ query: q }, (err, resp) => {
+      if (err) {
+        reject('An error as occurred')
+      } else {
+        resolve(resp.records)
+      }
+    })
+  })
+}
 
-};
-
-let findPropertiesByCategory = (category) => {
-    return new Promise((resolve, reject) => {
-        let q = `SELECT id,
+const findPropertiesByCategory = (category) => {
+  return new Promise((resolve, reject) => {
+    const q = `SELECT id,
                     title__c,
                     address__c,
                     city__c,
@@ -77,23 +76,22 @@ let findPropertiesByCategory = (category) => {
                     picture__c
                 FROM property__c
                 WHERE tags__c LIKE '%${category}%'
-                LIMIT 5`;
-        console.log(q);
-        org.query({query: q}, (err, resp) => {
-            if (err) {
-                console.error(err);
-                reject("An error as occurred");
-            } else {
-                resolve(resp.records);
-            }
-        });
-    });
+                LIMIT 5`
+    console.log(q)
+    org.query({ query: q }, (err, resp) => {
+      if (err) {
+        console.error(err)
+        reject('An error as occurred')
+      } else {
+        resolve(resp.records)
+      }
+    })
+  })
+}
 
-};
-
-let findPriceChanges = () => {
-    return new Promise((resolve, reject) => {
-        let q = `SELECT
+const findPriceChanges = () => {
+  return new Promise((resolve, reject) => {
+    const q = `SELECT
                     OldValue,
                     NewValue,
                     CreatedDate,
@@ -110,44 +108,42 @@ let findPriceChanges = () => {
                 FROM property__history
                 WHERE field = 'Price__c'
                 ORDER BY CreatedDate DESC
-                LIMIT 3`;
-        org.query({query: q}, (err, resp) => {
-            if (err) {
-                reject("An error as occurred");
-            } else {
-                resolve(resp.records);
-            }
-        });
-    });
-};
+                LIMIT 3`
+    org.query({ query: q }, (err, resp) => {
+      if (err) {
+        reject('An error as occurred')
+      } else {
+        resolve(resp.records)
+      }
+    })
+  })
+}
 
 
 let createCase = (propertyId, customerName, customerId) => {
+  return new Promise((resolve, reject) => {
+    const c = nforce.createSObject('Case')
+    c.set('subject', `Contact ${customerName} (Facebook Customer)`)
+    c.set('description', `Facebook id: ${customerId}`)
+    c.set('origin', 'Facebook Bot')
+    c.set('status', 'New')
+    c.set('Property__c', propertyId)
 
-    return new Promise((resolve, reject) => {
-        let c = nforce.createSObject('Case');
-        c.set('subject', `Contact ${customerName} (Facebook Customer)`);
-        c.set('description', "Facebook id: " + customerId);
-        c.set('origin', 'Facebook Bot');
-        c.set('status', 'New');
-        c.set('Property__c', propertyId);
+    org.insert({ sobject: c }, (err) => {
+      if (err) {
+        console.error(err)
+        reject('An error occurred while creating a case')
+      } else {
+        resolve(c)
+      }
+    })
+  })
+}
 
-        org.insert({sobject: c}, err => {
-            if (err) {
-                console.error(err);
-                reject("An error occurred while creating a case");
-            } else {
-                resolve(c);
-            }
-        });
-    });
+login()
 
-};
-
-login();
-
-exports.org = org;
-exports.findProperties = findProperties;
-exports.findPropertiesByCategory = findPropertiesByCategory;
-exports.findPriceChanges = findPriceChanges;
-exports.createCase = createCase;
+exports.org = org
+exports.findProperties = findProperties
+exports.findPropertiesByCategory = findPropertiesByCategory
+exports.findPriceChanges = findPriceChanges
+exports.createCase = createCase

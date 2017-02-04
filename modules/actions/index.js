@@ -26,5 +26,8 @@ export default function handleAction (res, message) {
       content: 'Sorry I did not understand',
     })
   }
+  console.log('======================================')
+  console.log(replies)
+  console.log('======================================')
   return replies
 }
