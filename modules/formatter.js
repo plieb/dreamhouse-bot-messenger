@@ -113,22 +113,22 @@ exports.formatAppointment = (property) => {
   return {
     type: 'card',
     content: {
-      title: `Select one of the available appointments below at ${property.get('Address__c')} in ${property.get('City__c')}.`,
+      title: `Select one of the available appointments below at ${property.address__c} in ${property.city__c}.`,
       buttons: [
         {
           type: 'postback',
           title: options[0],
-          value: `Confirm visit, ${property.get('Address__c')} in ${property.get('City__c')}, ${options[0]}`,
+          value: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
         },
         {
           type: 'postback',
           title: options[1],
-          value: `Confirm visit, ${property.get('Address__c')} in ${property.get('City__c')}, ${options[0]}`,
+          value: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
         },
         {
           type: 'postback',
           title: options[2],
-          value: `Confirm visit, ${property.get('Address__c')} in ${property.get('City__c')}, ${options[0]}`,
+          value: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
         },
       ],
     },
