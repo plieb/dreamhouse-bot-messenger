@@ -6,7 +6,7 @@ import { handleMessage } from './messages'
 
 const app = express()
 
-app.set('port', process.env.PORT_RUN || 5000)
+app.set('port', process.env.PORT || 5000)
 
 app.use(bodyParser.json())
 
