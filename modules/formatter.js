@@ -12,6 +12,7 @@ exports.formatProperties = (properties) => {
   properties.forEach((property) => {
       console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
       console.log(property)
+      console.log(property.get('Address__c'))
       console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     elements.push({
       title: property.get('Title__c'),
@@ -104,6 +105,7 @@ exports.formatAppointment = (property) => {
   ]
   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   console.log(property)
+  console.log(property.get('Address__c'))
   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   return {
     type: 'card',
