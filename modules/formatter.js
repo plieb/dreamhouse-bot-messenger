@@ -99,6 +99,10 @@ exports.formatAppointment = (property) => {
     `${moment().add(3, 'days').format('dddd MMM Do')} at 1pm`,
     `${moment().add(3, 'days').format('dddd MMM Do')} at 6pm`,
   ]
+  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  console.log(property)
+  console.log(property.city__c)
+  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   return {
     type: 'card',
     content: {
@@ -108,10 +112,10 @@ exports.formatAppointment = (property) => {
           type: 'postback',
           title: options[0],
           value: JSON.stringify({
-            text: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
+            text: `Confirm visit, ${property.address__c} in ${property.city__c}, ${options[0]}`,
             propertyId: property.Id,
             date: options[0],
-            city: property.City__c,
+            city: property.city__c,
           }),
         },
         {
