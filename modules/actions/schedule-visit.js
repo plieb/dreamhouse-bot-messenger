@@ -6,7 +6,7 @@ export default async function scheduleVisit(res, message) {
   console.log('SCHEDULE VISIT')
 
   const replies = []
-  const property = await salesforce.findProperties({ id: message.propertyId })
+  const property = await salesforce.findProperties({ id: message.propertyId })[0]
   console.log('======================================')
   console.log(property)
   console.log('======================================')
