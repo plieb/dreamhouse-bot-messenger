@@ -9,6 +9,9 @@ exports.formatMsg = msg => ({
 
 exports.formatProperties = (properties) => {
   const elements = []
+  console.log('======================================')
+  console.log(properties)
+  console.log('======================================')
   properties.forEach((property) => {
     elements.push({
       title: property.get('Title__c'),
@@ -101,6 +104,9 @@ exports.formatAppointment = (property) => {
     `${moment().add(3, 'days').format('ddd MMM Do')} at 1pm`,
     `${moment().add(3, 'days').format('ddd MMM Do')} at 6pm`,
   ]
+  console.log('======================================')
+  console.log(property)
+  console.log('======================================')
   return {
     type: 'card',
     content: {
