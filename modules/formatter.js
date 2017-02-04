@@ -9,13 +9,7 @@ exports.formatMsg = msg => ({
 
 exports.formatProperties = (properties) => {
   const elements = []
-  console.log('======================================')
-  console.log(properties)
-  console.log('======================================')
   properties.forEach((property) => {
-    console.log('======================================')
-    console.log(property)
-    console.log('======================================')
     elements.push({
       title: property.get('Title__c'),
       subtitle: `${property.get('Address__c')}, ${property.get('City__c')} ${property.get('State__c')} · ${numeral(property.get('Price__c')).format('$0,0')}`,
@@ -77,7 +71,6 @@ exports.formatPriceChanges = (priceChanges) => {
           value: JSON.stringify({
             text: 'View broker info',
             propertyId: property.Id,
-
           }),
         },
         {
@@ -86,7 +79,6 @@ exports.formatPriceChanges = (priceChanges) => {
           value: JSON.stringify({
             text: 'Contact me',
             propertyId: property.Id,
-
           }),
         },
       ],
@@ -101,15 +93,12 @@ exports.formatPriceChanges = (priceChanges) => {
 
 exports.formatAppointment = (property) => {
   const options = [
-    `${moment().add(1, 'days').format('ddd MMM Do')} at 10am`,
-    `${moment().add(2, 'days').format('ddd MMM Do')} at 9am`,
-    `${moment().add(2, 'days').format('ddd MMM Do')} at 5pm`,
-    `${moment().add(3, 'days').format('ddd MMM Do')} at 1pm`,
-    `${moment().add(3, 'days').format('ddd MMM Do')} at 6pm`,
+    `${moment().add(1, 'days').format('dddd MMM Do')} at 10am`,
+    `${moment().add(2, 'days').format('dddd MMM Do')} at 9am`,
+    `${moment().add(2, 'days').format('dddd MMM Do')} at 5pm`,
+    `${moment().add(3, 'days').format('dddd MMM Do')} at 1pm`,
+    `${moment().add(3, 'days').format('dddd MMM Do')} at 6pm`,
   ]
-  console.log('======================================')
-  console.log(property)
-  console.log('======================================')
   return {
     type: 'card',
     content: {
@@ -118,17 +107,32 @@ exports.formatAppointment = (property) => {
         {
           type: 'postback',
           title: options[0],
-          value: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
+          value: JSON.stringify({
+            text: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
+            propertyId: property.Id,
+            date: options[0],
+            city: property.City__c,
+          }),
         },
         {
           type: 'postback',
           title: options[1],
-          value: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
+          value: JSON.stringify({
+            text: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[1]}`,
+            propertyId: property.Id,
+            date: options[1],
+            city: property.City__c,
+          }),
         },
         {
           type: 'postback',
           title: options[2],
-          value: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[0]}`,
+          value: JSON.stringify({
+            text: `Confirm visit, ${property.Address__c} in ${property.City__c}, ${options[2]}`,
+            propertyId: property.Id,
+            date: options[2],
+            city: property.City__c,
+          }),
         },
       ],
     },
