@@ -5,14 +5,11 @@ import uploads from './modules/uploads'
 
 const recastClient = new Client(process.env.RE_BOT_TOKEN)
 
-export async function handleMessage(message) {
+export default async function handleMessage(message) {
   console.log('\n**********************************************************')
   try {
     console.log('MESSAGE RECEIVED', message)
 
-    console.log('======================================')
-    console.log(message)
-    console.log('======================================')
     let text = ''
     let payload = ''
     let replies = []
@@ -27,13 +24,7 @@ export async function handleMessage(message) {
       }
       const { senderId } = message
       const res = await recastClient.textConverse(text, { conversationToken: senderId })
-      console.log('======================================')
-      console.log(res)
-      console.log('======================================')
       replies = await handleAction(res, payload, message)
-      console.log('======================================')
-      console.log(replies)
-      console.log('======================================')
     }
     replies.forEach(reply => message.addReply(reply))
 
