@@ -7,7 +7,6 @@ const actions = {
   'contact-me': require('./contact-me'),
   'schedule-visit': require('./schedule-visit'),
   'confirm-visit': require('./confirm-visit'),
-  'uploads': require('./uploads'),
 }
 
 export default function handleAction(res, payload, message) {
