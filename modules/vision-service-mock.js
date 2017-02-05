@@ -1,7 +1,6 @@
-"use strict";
 
 exports.classify = imageURL => new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve("contemporary");
-    }, 2000);
-});
+  setTimeout(() => {
+    resolve('contemporary')
+  }, 2000)
+})
