@@ -20,19 +20,23 @@
     },
     "BC_USER_SLUG": {
       "description": "Recast bot connector user slug",
-      "value":""
+      "value":"",
+      "required":false
     },
     "BC_BOT_ID": {
       "description": "Recast bot connector bot id",
-      "value":""
+      "value":"",
+      "required":false
     },
     "BC_USER_TOKEN": {
       "description": "Recast bot connector user token",
-      "value":""
+      "value":"",
+      "required":false
     },
     "RE_BOT_TOKEN": {
       "description": "Recast bot token",
-      "value":""
+      "value":"",
+      "required":false
     }
   }
 }
