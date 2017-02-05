@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/babel-cli/bin/babel-node.js server.js",
+    "start": "node ./node_modules/babel-cli/bin/babel-node.js src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./modules/*"
   },
