@@ -31,6 +31,9 @@ export async function handleMessage(message) {
       console.log(res)
       console.log('======================================')
       replies = await handleAction(res, payload, message)
+      console.log('======================================')
+      console.log(replies)
+      console.log('======================================')
     }
     replies.forEach(reply => message.addReply(reply))
 
