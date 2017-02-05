@@ -12,6 +12,10 @@ export default async function processUpload(attachments) {
   const houseType = await visionService.classify(attachment.url)
   replies.push(formatter.formatMsg(`Looking for houses matching "${houseType}"`))
   const properties = await salesforce.findPropertiesByCategory(houseType)
-  replies.push(formatter.formatProperties(properties))
+  if (properties.length) {
+    replies.push(formatter.formatProperties(properties))
+  } else {
+    replies.push(formatter.formatMsg(`Couldn't find any houses matching "${houseType}"`))
+  }
   return replies
 }
