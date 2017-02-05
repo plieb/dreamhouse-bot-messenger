@@ -17,7 +17,7 @@ export async function handleMessage(message) {
     let payload = ''
     let replies = []
     if (message.content.attachment.type === 'picture') {
-      await uploads(message.content.attachment)
+      replies = await uploads(message.content.attachment)
     } else {
       if (message.content.attachment.type === 'payload') {
         payload = JSON.parse(message.content.attachment.content)
