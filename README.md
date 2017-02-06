@@ -57,7 +57,7 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     - Bot URL: enter your Heroku URL
     
 1. In **Settings** find your `slug`, `token` and `bot ID`. Copy paste those values in the **Config Variables** section of your Heroku app to `BC_USER_SLUG`, `BC_USER_TOKEN` and `BC_BOT_ID`
-1. Get back to your Bot Connector account and add a Messenger channel. Give it a name and follow step 1 to 4 in order to get your **Secret Key** & **Page Token**
+1. Get back to your Bot Connector account and add a Messenger channel. Give it a name and follow step 1 to 4 in order to get your **Secret Key** & **Page Token**. Do not forget to subscribe to the page in the Messenger > Seetings > Webhooks section on developers.facebook.com
 
 ## Step 5: Get your Recast bot
 
