@@ -138,6 +138,12 @@ const createCase = (customerName, customerId, propertyId) => {
   })
 }
 
+nforce.console.addEventListener('NewSMSText', function(result){
+  var smsTextRecord = j$.parseJSON(result.message)
+  var liveTextSessionId = smsTextrecord.data.sobject['LiveText__Conversation_Header__c']
+  console.log('nforce console caught the following message: ' + smsTextrecord)
+})
+
 login()
 
 exports.org = org
