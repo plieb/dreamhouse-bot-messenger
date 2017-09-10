@@ -16,9 +16,6 @@ export default async function handleAction(res, payload, message) {
   if (actions[currentAction]) {
     console.log('Enter action')
     replies = await actions[currentAction].default(res, payload, message)
-  console.log('======================================')
-  console.log(replies)
-  console.log('======================================')
   } else if (res.reply()) {
     replies.push({
       type: 'text',

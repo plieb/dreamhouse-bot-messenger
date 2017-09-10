@@ -30,7 +30,6 @@ export async function replyMessage(message) {
       replies.forEach(reply => message.addReply(reply))
     }
 
-    console.log('REPLY', message.reply())
     await message.reply()
   } catch (err) {
     console.error('An error occured while handling message', err)
