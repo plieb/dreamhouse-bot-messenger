@@ -65,8 +65,5 @@ export default async function findBedrooms(res) {
       replies.push(formatter.formatMsg(`Couldn't find any houses with ${bedrooms} bedrooms`))
     }
   }
-  console.log('======================================')
-  console.log(replies)
-  console.log('======================================')
   return replies
 }
