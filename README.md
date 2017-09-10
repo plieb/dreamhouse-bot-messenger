@@ -27,7 +27,7 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     - Selected OAuth Scopes: Full Access (full)
     - Click **Save**
 
-## Step 3: Deploy the Messenger Bot
+## Step 3: Deploy the bot on Heroku
 
 1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com/)
 1. Click the button below to deploy the Messenger bot on Heroku:
@@ -40,30 +40,23 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     - For **SF_CLIENT_SECRET**, enter the Consumer Secret of your Salesforce Connected App
     - For **SF_USER_NAME**, enter the the username of your Salesforce integration user
     - For **SF_PASSWORD**, enter the the password + your secret token of your Salesforce integration user
-    - For **BC_USER_SLUG** blank for now (filled at step 4)
-    - For **BC_BOT_ID** blank for now (filled at step 4)
-    - For **BC_USER_TOKEN** blank for now (filled at step 4)
-    - For **RE_BOT_TOKEN** blank for now (filled at step 5)
+    - For **LANGUAGE**, enter 'en'
+    - For **REQUEST_TOKEN** filled at step 4
     
 1. Time to replace the callback URL from your Salesforce app to your **Heroku URL** 
 
-
-## Step 4: Create your bot on Bot Connector
-
-1. Make sure you are logged in to your [Bot Connector account](https://botconnector.recast.ai/)
-1. Click the button **New Bot** and define the bot as follows
- 
-    - Bot Name: Salesforce Bot
-    - Bot URL: enter your Heroku URL
-    
-1. In **Settings** find your `slug`, `token` and `bot ID`. Copy paste those values in the **Config Variables** section of your Heroku app to `BC_USER_SLUG`, `BC_USER_TOKEN` and `BC_BOT_ID`
-1. Get back to your Bot Connector account and add a Messenger channel. Give it a name and follow step 1 to 4 in order to get your **Secret Key** & **Page Token**. Do not forget to subscribe to the page in the Messenger > Seetings > Webhooks section on developers.facebook.com
-
-## Step 5: Get your Recast bot
+## Step 4: Get your Recast bot
 
 1. Make sure you are logged in to your [Recast.AI account](https://recast.ai/)
 1. Follow this link [Salesforce DreamHouse bot](https://recast.ai/pe/salesforce-dreamhouse/learn) and fork the bot to your account
-1. Copy paste your `bot request access token` in the **Config Variables** section of your Heroku app to `RE_BOT_TOKEN`
+1. Copy paste your `bot request access token` in the **Config Variables** section of your Heroku app to `REQUEST_TOKEN`
+
+## Step 5: Connect your bot to Messenger
+
+1. Go to your **RUN** tab
+1. Click the **Bot Connector** tab and follow instructions to add a Messenger channel
+1. Once it's done at the top set your **Current bot webhook** to :
+    - Heroku URL + **/webhook** (MY_HEROKU_URL.heroku.com/webhook)
 1. You're all set !
 
 ## Next steps ideas :
