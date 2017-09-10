@@ -7,6 +7,10 @@ export default async function contactMe(res, payload, message) {
 
   const replies = []
   replies.push(formatter.formatMsg('Thanks for your interest. I asked a broker to contact you asap.'))
+  console.log('======================================')
+  console.log(message)
+  console.log(message.data)
+  console.log('======================================')
   const firstName = message.data.userName.split(' ')[0]
   const lastName = message.data.userName.split(' ')[1]
   if (payload.propertyId) {
