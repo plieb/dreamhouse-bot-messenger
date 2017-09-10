@@ -9,8 +9,6 @@ export async function replyMessage(message) {
   console.log('\n**********************************************************')
   try {
     console.log('MESSAGE RECEIVED', message)
-    console.log('MESSAGE CONTENT', message.content)
-    console.log('MESSAGE ATTACHEMENT', message.type)
 
     let text = message.content
     const { senderId } = message
@@ -18,13 +16,13 @@ export async function replyMessage(message) {
     let payload = ''
     let replies = []
     if (message.type === 'picture') {
-      replies = await uploads(message.content.attachment)
+      replies = await uploads(message.attachment)
     } else {
       if (message.type === 'payload') {
-        payload = JSON.parse(message.content.attachment.content)
+        payload = JSON.parse(message.content)
         text = payload.text
       } else {
-        text = message.content.attachment.content
+        text = message.content
       }
       const res = await req.converseText(text, { conversationToken: senderId })
       console.log('RECAST ANSWER', res)
