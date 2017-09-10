@@ -1,7 +1,7 @@
 /* module improts */
 import handleAction from './actions'
 import uploads from './uploads'
-import { Client } from 'recastai'
+import { request } from 'recastai'
 
 const req = new request(process.env.REQUEST_TOKEN, process.env.LANGUAGE)
 
