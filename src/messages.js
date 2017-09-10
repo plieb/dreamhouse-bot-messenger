@@ -26,7 +26,7 @@ export async function replyMessage(message) {
       }
       const res = await req.converseText(text, { conversationToken: senderId })
       console.log('RECAST ANSWER', res)
-      replies = await handleAction(res, payload)
+      replies = await handleAction(res, payload, message)
       replies.forEach(reply => message.addReply(reply))
     }
 
