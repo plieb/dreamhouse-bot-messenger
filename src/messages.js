@@ -9,16 +9,18 @@ export async function replyMessage(message) {
   console.log('\n**********************************************************')
   try {
     console.log('MESSAGE RECEIVED', message)
+    console.log('MESSAGE CONTENT', message.content)
+    console.log('MESSAGE ATTACHEMENT', message.type)
 
     let text = message.content
     const { senderId } = message
 
     let payload = ''
     let replies = []
-    if (message.content.attachment.type === 'picture') {
+    if (message.type === 'picture') {
       replies = await uploads(message.content.attachment)
     } else {
-      if (message.content.attachment.type === 'payload') {
+      if (message.type === 'payload') {
         payload = JSON.parse(message.content.attachment.content)
         text = payload.text
       } else {
